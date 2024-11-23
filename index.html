@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Flow Through the Network</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            font-size: 150%;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        h1, h3, h4 {
+            color: #333;
+            margin-top: 20px;
+        }
+        p, li {
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .image-placeholder, .interactive-placeholder, .continue-button, .vocab-section {
+            text-align: left;
+        }
+        .image-placeholder img, .interactive-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .vocab-section {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .vocab-section h3 {
+            color: #1e90ff;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .vocab-section h4 {
+            color: #000;
+            font-size: 0.9em;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .vocab-term {
+            font-weight: bold;
+            color: #1e90ff;
+        }
+        .continue-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            color: #ffffff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .math-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section id="section1">
+        <h1>Data Flow Through the Network</h1>
+        <p>Let's see how information actually flows through these layers.</p>
+        <div class="interactive-placeholder">
+            <img src="/placeholder.svg?height=300&width=600" alt="Animation showing data flowing through the network, with mathematical transformations at each step">
+        </div>
+        <p>The process follows these steps:</p>
+        <ol>
+            <li>Input values enter through the input layer</li>
+            <li>Each connection carries the value forward, multiplying it by a weight</li>
+            <li>Each node in the next layer sums its inputs</li>
+            <li>An activation function transforms the sum</li>
+            <li>The process repeats until reaching the output</li>
+        </ol>
+        <div class="vocab-section">
+            <h3>Build Your Vocab</h3>
+            <h4>Forward Propagation</h4>
+            <p>The process of data flowing forward through the network, from input to output, with each layer performing its computations in sequence.</p>
+        </div>
+        <div class="continue-button" onclick="showNextSection(2)">Continue</div>
+    </section>
+
+    <section id="section2">
+        <p>Let's express this mathematically. For any node in a hidden or output layer:</p>
+        <div class="math-section">
+            \[ z^{[l]}_j = \sum_{i=1}^{n} w^{[l]}_{ji} a^{[l-1]}_i + b^{[l]}_j \]
+            \[ a^{[l]}_j = \sigma(z^{[l]}_j) \]
+        </div>
+        <p>Where:</p>
+        <ul>
+            <li>\(z^{[l]}_j\) is the weighted sum for node j in layer l</li>
+            <li>\(a^{[l]}_j\) is the activation of node j in layer l</li>
+            <li>\(w^{[l]}_{ji}\) is the weight connecting to node j from node i</li>
+            <li>\(b^{[l]}_j\) is the bias for node j</li>
+            <li>\(\sigma\) is the activation function</li>
+        </ul>
+    </section>
+
+    <script>
+        let currentSection = 1;
+
+        function showNextSection(nextSectionId) {
+            const nextSectionElement = document.getElementById("section" + nextSectionId);
+            const currentButton = event.target;
+    
+            // Hide the clicked button
+            currentButton.style.display = "none";
+    
+            nextSectionElement.style.display = "block";
+    
+            setTimeout(() => {
+                nextSectionElement.style.opacity = "1";
+                nextSectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 10);
+
+            currentSection = nextSectionId;
+        }
+
+        // Show the first section initially
+        document.getElementById("section1").style.display = "block";
+        document.getElementById("section1").style.opacity = "1";
+    </script>
+</body>
+</html>
